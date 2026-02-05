@@ -13,11 +13,9 @@ module load apptainer
 
 META="/scratch/cqh6wn/Iso_new/fasta/isofemale_metadata.cleaned.csv"
 FASTQ="/scratch/cqh6wn/Iso_new/fasta/fastq_files"
-OUT="/scratch/cqh6wn/Iso_new/mapping/output"
+OUT="/scratch/cqh6wn/Iso_new/mapping/results"
 CONTAINER="/scratch/cqh6wn/containers/DEST.sif"
 
-mkdir -p ${OUT}
-mkdir -p /scratch/cqh6wn/Iso_new/dest/logs
 
 # Skip header
 line=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" ${META})
