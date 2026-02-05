@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 #
 #SBATCH -J download_sra
 #SBATCH -c 6
