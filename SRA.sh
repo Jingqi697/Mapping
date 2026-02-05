@@ -9,6 +9,7 @@
 #SBATCH -e /scratch/cqh6wn/Iso_new/fasta/logs/sra.%A_%a.err
 #SBATCH -p standard
 #SBATCH --account=berglandlab
+#SBATCH --array=1-365
 
 module load sratoolkit/3.1.1
 
