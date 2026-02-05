@@ -14,7 +14,8 @@ module load apptainer
 META="/scratch/cqh6wn/Iso_new/fasta/isofemale_metadata.cleaned.csv"
 FASTQ="/scratch/cqh6wn/Iso_new/fasta/fastq_files"
 OUT="/scratch/cqh6wn/Iso_new/mapping/results"
-CONTAINER="/scratch/cqh6wn/containers/DEST.sif"
+CONTAINER="/standard/BerglandTeach/dest_freeze2.6.1_latest.sif"
+
 
 ## Read metadata
 line=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "${META}")
