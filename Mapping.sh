@@ -16,9 +16,13 @@ FASTQ="/scratch/cqh6wn/Iso_new/fasta/fastq_files"
 OUT="/scratch/cqh6wn/Iso_new/mapping/results"
 CONTAINER="/scratch/cqh6wn/containers/DEST.sif"
 
-
-# Skip header
-line=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" ${META})
+## Read metadata
+line=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "${META}")
+# Safety check
+if [[ -z "${line}" ]]; then
+    echo "No metadata entry for array task ${SLURM_ARRAY_TASK_ID}"
+    exit 0
+fi
 
 sample=$(echo "${line}" | cut -d',' -f1)
 srr=$(echo "${line}" | cut -d',' -f2)
@@ -26,22 +30,25 @@ srr=$(echo "${line}" | cut -d',' -f2)
 echo "Sample: ${sample}"
 echo "SRR: ${srr}"
 
+### Path
+
 R1="${FASTQ}/${srr}_1.fastq.gz"
 R2="${FASTQ}/${srr}_2.fastq.gz"
 
-# Safety check
 if [[ ! -f "${R1}" || ! -f "${R2}" ]]; then
     echo "Missing FASTQ pair for ${srr}"
     exit 1
 fi
 
+## Run DEST
+
 singularity run \
-    ${CONTAINER} \
-    ${R1} \
-    ${R2} \
-    ${sample} \
-    ${OUT} \
-    --cores ${SLURM_CPUS_PER_TASK} \
+    "${CONTAINER}" \
+    "${R1}" \
+    "${R2}" \
+    "${sample}" \
+    "${OUT}" \
+    --cores "${SLURM_CPUS_PER_TASK}" \
     --num-flies 1 \
     --min-cov 4 \
     --max-cov 0.95 \
