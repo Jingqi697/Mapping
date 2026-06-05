@@ -6,14 +6,14 @@
 #SBATCH --mem 90G
 #SBATCH -p standard
 #SBATCH --account=berglandlab
-#SBATCH -o /scratch/cqh6wn/Iso_new/mapping/logs/dest.%A_%a.out
-#SBATCH -e /scratch/cqh6wn/Iso_new/mapping/logs/dest.%A_%a.err
+#SBATCH -o /scratch/cqh6wn/Isofemale/Global/mapping/logs/dest.%A_%a.out
+#SBATCH -e /scratch/cqh6wn/Isofemale/Global/mapping/logs/dest.%A_%a.err
 
 module load apptainer
 
-META="/scratch/cqh6wn/Iso_new/fasta/isofemale_metadata.cleaned.csv"
-FASTQ="/scratch/cqh6wn/Iso_new/fasta/fastq_files"
-OUT="/scratch/cqh6wn/Iso_new/mapping/results"
+META="/scratch/cqh6wn/Isofemale/Global/fasta/isofemale_metadata.cleaned.csv"
+FASTQ="/scratch/cqh6wn/Isofemale/Global/fasta/fastq_files"
+OUT="/scratch/cqh6wn/Isofemale/Global/mapping/results"
 CONTAINER="/standard/BerglandTeach/dest_freeze2.6.1_latest.sif"
 
 
